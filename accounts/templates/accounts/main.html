@@ -71,13 +71,14 @@ $(function() {
     var response;
     var uuid;
     var session_data = 'NULL'
-    const proxyurl = "https://rocky-lake-46801.herokuapp.com/";
+    // const proxyurl = "https://rocky-lake-46801.herokuapp.com/";
     // sessionID = "cvbrrrm253fnx5j77n496ta9a48emuxb";
-    const url = "https://t41v93n5u5.execute-api.eu-west-2.amazonaws.com/prod/processask?session_key=" + session_data + "&db_input=NULL&db_type=1";
+    // const url = "https://t41v93n5u5.execute-api.eu-west-2.amazonaws.com/prod/processask?session_key=" + session_data + "&db_input=NULL&db_type=1";
+    const url = "https://api.silverscraper.com/hsbc/dynamodb_update?db_type=1&db_input=NULL&session_key=" + session_data;
     // console.log('reached');
 
     // try another way
-    fetch(proxyurl+url).then(function(response) {
+    fetch(url).then(function(response) {
     return response.json();
     }).then(function(data) {
     // console.log(data);
@@ -165,11 +166,11 @@ $(function() {
        ];
        // var sessionID = getJSessionId(); as the JS read of cookie shall be discouraged
        var res;
-       const proxyurl = "https://cors-anywhere.herokuapp.com/";
+       // const proxyurl = "https://cors-anywhere.herokuapp.com/";
        // sessionID = "cvbrrrm253fnx5j77n496ta9a48emuxb";
        const url = "https://t41v93n5u5.execute-api.eu-west-2.amazonaws.com/prod/processask?session_key=" + session_data + "&db_input=" + msg + "&db_type=2";
        console.log('reached');
-       fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
+       fetch(url) // https://cors-anywhere.herokuapp.com/https://example.com
            .then(response => response.text())
            .then(contents => generate_message_response(contents, 'user'))
            .catch(() => console.log("Can't access " + url + " response. Blocked by browser?"));
