@@ -100,9 +100,9 @@ $(function() {
           document.cookie = name + "=" + (value || "")  + expires + "; path=/";
       }
     console.log('Getting the cookie');
-    var x = getCookie('ppkcookie');
+    var uuid = getCookie('ppkcookie');
 // put the condition here
-    if (x ==  null) {
+    if (uuid ==  null) {
     // console.log(x);
     console.log('Cookie not found');
     fetch(url).then(function(response) {
@@ -155,6 +155,20 @@ $(function() {
    })
 
    function generate(msg) {
+     // check how to reutilise below function
+     function getCookie(name) {
+     var nameEQ = name + "=";
+     var ca = document.cookie.split(';');
+     for(var i=0;i < ca.length;i++) {
+         var c = ca[i];
+         while (c.charAt(0)==' ') c = c.substring(1,c.length);
+         if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+     }
+     return null;
+     }
+
+     var uuid = getCookie('ppkcookie');
+
        generate_message_self(msg, 'self');
        var buttons = [{
                name: 'Existing User',
@@ -169,8 +183,8 @@ $(function() {
        var res;
        // const proxyurl = "https://cors-anywhere.herokuapp.com/";
        // sessionID = "cvbrrrm253fnx5j77n496ta9a48emuxb";
-       const url = "https://t41v93n5u5.execute-api.eu-west-2.amazonaws.com/prod/processask?session_key=" + session_data + "&db_input=" + msg + "&db_type=2";
-       console.log('reached');
+       const url = "https://t41v93n5u5.execute-api.eu-west-2.amazonaws.com/prod/processask?session_key=" + uuid + "&db_input=" + msg + "&db_type=2";
+       console.log('Getting the response');
        fetch(url) // https://cors-anywhere.herokuapp.com/https://example.com
            .then(response => response.text())
            .then(contents => generate_message_response(contents, 'user'))
@@ -260,6 +274,9 @@ function getJSessionId(){
    return jsId;
 }
 </script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
 </html>
