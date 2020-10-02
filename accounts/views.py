@@ -52,16 +52,17 @@ def home(request):
         db_session_key= request.session.session_key
         #db_time = time.time()
         #db_timestamp = datetime.now().strftime("%Y-%m-%d,%H:%M:%S")
-        url = "https://t41v93n5u5.execute-api.eu-west-2.amazonaws.com/prod/processask?session_key="+db_session_key+"&db_input=NULL&db_type=1"
+        #url = "https://t41v93n5u5.execute-api.eu-west-2.amazonaws.com/prod/processask?session_key="+db_session_key+"&db_input=NULL&db_type=1"
         #mistry url
         #url = "https://7q539nw8rl.execute-api.ap-southeast-1.amazonaws.com/default/dynamodb_update?session_key="+db_session_key+"&db_input=NULL&db_type=1"
-        print(url)
-        response = requests.get(url)
-        print(response)
-        intents = response.json()['Intent List']
-        print(intents)
+        #print(url)
+        #response = requests.get(url)
+        #print(response.text)
+        # intents = response.json()['Intent List']
+        # print(intents)
         form = BinForm()
-    context= {'form':form ,'converted':converted,'intents':intents , 'db_session_key':db_session_key}
+    # context= {'form':form ,'converted':converted,'intents':intents , 'db_session_key':db_session_key}
+    context= {'form':form , 'db_session_key':db_session_key}
     return render(request,'accounts/dashboard.html',context)
 
 
