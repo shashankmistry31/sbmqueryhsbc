@@ -73,7 +73,7 @@ $(function() {
     var session_data = 'NULL'
     // const proxyurl = "https://rocky-lake-46801.herokuapp.com/";
     // sessionID = "cvbrrrm253fnx5j77n496ta9a48emuxb";
-    const url = "https://t41v93n5u5.execute-api.eu-west-2.amazonaws.com/prod/processask?session_key=" + session_data + "&db_input=NULL&db_type=1";
+    var url = "https://t41v93n5u5.execute-api.eu-west-2.amazonaws.com/prod/hsbc?session_key=" + session_data + "&db_input=NULL&db_type=1";
     // const url = "https://api.silverscraper.com/hsbc/dynamodb_update?db_type=1&db_input=NULL&session_key=" + session_data;
     // console.log('reached');
 
@@ -117,6 +117,23 @@ $(function() {
     }).catch(function() {
     console.log("Error in fetching the uuid response");
     });
+  } else {
+    console.log('Cookie Found')
+    session_data =uuid
+    url = "https://t41v93n5u5.execute-api.eu-west-2.amazonaws.com/prod/hsbc?session_key=" + session_data + "&db_input=NULL&db_type=1";
+    fetch(url).then(function(response) {
+    return response.json();
+    }).then(function(data) {
+    // console.log(data);
+    // uuid = data.uuid_string;
+    console.log('Logged into Dynamo DB')
+    // console.log(uuid)
+    // var json_str = setCookie('ppkcookie',uuid,1);
+    // const obj = JSON.parse(data);
+    }).catch(function() {
+    console.log("Error in fetching the uuid response");
+    });
+
   }
 
 
@@ -183,7 +200,7 @@ $(function() {
        var res;
        // const proxyurl = "https://cors-anywhere.herokuapp.com/";
        // sessionID = "cvbrrrm253fnx5j77n496ta9a48emuxb";
-       const url = "https://t41v93n5u5.execute-api.eu-west-2.amazonaws.com/prod/processask?session_key=" + uuid + "&db_input=" + msg + "&db_type=2";
+       const url = "https://t41v93n5u5.execute-api.eu-west-2.amazonaws.com/prod/hsbc?session_key=" + uuid + "&db_input=" + msg + "&db_type=2";
        console.log('Getting the response');
        fetch(url) // https://cors-anywhere.herokuapp.com/https://example.com
            .then(response => response.text())
@@ -274,7 +291,7 @@ function getJSessionId(){
    return jsId;
 }
 </script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
